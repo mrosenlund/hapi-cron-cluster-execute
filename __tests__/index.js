@@ -214,7 +214,7 @@ describe('registration assertions', () => {
         }
     });
 
-    it('should throw error when a job is defined without a request object', async () => {
+    it('should throw error when a job is defined without a request or execute option', async () => {
 
         const server = new Hapi.Server();
 
@@ -237,7 +237,7 @@ describe('registration assertions', () => {
             });
         }
         catch (err) {
-            expect(err.message).toEqual('Missing job request options');
+            expect(err.message).toEqual('Missing job request options or execute function');
         }
     });
 
@@ -282,7 +282,7 @@ describe('plugin functionality', () => {
             plugin: HapiCron,
             options: {
                 lock: {
-                    url: 'mongodb://localhost:27017/test',
+                    url: 'mongodb://localhost/test',
                     key: 'lockTest',
                     ttl: 5000,
                     retry: 1000
@@ -313,7 +313,7 @@ describe('plugin functionality', () => {
             plugin: HapiCron,
             options: {
                 lock: {
-                    url: 'mongodb://localhost:27017/test',
+                    url: 'mongodb://localhost/test',
                     key: 'lockTest',
                     ttl: 5000,
                     retry: 1000
